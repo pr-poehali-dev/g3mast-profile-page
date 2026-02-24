@@ -73,57 +73,91 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
 
-      {/* NAVBAR */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "glass py-3 shadow-2xl"
-            : "bg-transparent py-5"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-          <a href="#hero" className="text-sm font-medium tracking-widest gradient-text-animated">
+      {/* NAVBAR — облачко */}
+      <nav className="fixed top-5 left-0 right-0 z-50 flex justify-center px-4">
+        {/* Desktop — pill/cloud */}
+        <div
+          className="hidden md:flex items-center gap-2 px-3 py-2 animate-slide-down"
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: "100px",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)",
+          }}
+        >
+          <a
+            href="#hero"
+            className="text-xs font-medium tracking-widest gradient-text-animated px-4 py-1.5 rounded-full"
+            style={{ background: "rgba(255,255,255,0.08)" }}
+          >
             g3mast
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-xs font-light text-white/60 hover:text-white transition-colors duration-300 tracking-widest uppercase"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
+          <div className="w-px h-4 bg-white/10 mx-1" />
 
-          {/* Mobile burger */}
-          <button
-            className="md:hidden text-white/60 hover:text-white transition-colors"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <Icon name={menuOpen ? "X" : "Menu"} size={20} />
-          </button>
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-xs font-light text-white/50 hover:text-white hover:bg-white/8 transition-all duration-300 tracking-wider px-4 py-1.5 rounded-full"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
 
-        {/* Mobile menu */}
-        {menuOpen && (
-          <div className="md:hidden glass mt-2 mx-4 rounded-2xl p-4 animate-slide-down">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="block py-3 px-4 text-xs font-light text-white/70 hover:text-white tracking-widest uppercase transition-colors border-b border-white/5 last:border-0"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        )}
+        {/* Mobile — compact cloud */}
+        <div
+          className="md:hidden flex items-center justify-between w-full max-w-sm px-4 py-2.5"
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: "100px",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)",
+          }}
+        >
+          <a href="#hero" className="text-xs font-medium tracking-widest gradient-text-animated px-3 py-1 rounded-full"
+            style={{ background: "rgba(255,255,255,0.08)" }}>
+            g3mast
+          </a>
+          <button
+            className="text-white/60 hover:text-white transition-colors p-1"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <Icon name={menuOpen ? "X" : "Menu"} size={18} />
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile dropdown — тоже облачко */}
+      {menuOpen && (
+        <div
+          className="md:hidden fixed top-20 left-1/2 -translate-x-1/2 z-40 w-52 animate-slide-down"
+          style={{
+            background: "rgba(20,20,20,0.85)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: "24px",
+            boxShadow: "0 16px 48px rgba(0,0,0,0.6)",
+          }}
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className="block py-3 px-5 text-xs font-light text-white/70 hover:text-white tracking-widest uppercase transition-colors border-b border-white/5 last:border-0"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
 
       {/* HERO */}
       <section
